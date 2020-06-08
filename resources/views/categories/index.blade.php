@@ -23,20 +23,18 @@
                                 <td>{{ $ind + 1 }}</td>
                                 <td>{{ $category->name }}</td>
                                 <td>
-                                    <form style="display: inline-block" action="{{ route('categories.show', $category) }}" method="GET">
-                                        <button type="submit" class="btn btn-outline-info">Show</button>
-                                    </form>
-                                    <form style="display: inline-block" action="{{ route('categories.edit', $category) }}" method="GET">
-                                        <button type="submit" class="btn btn-outline-primary">Edit</button>
-                                    </form>
-                                    <form style="display: inline-block" action="{{ route('categories.destroy', $category) }}" method="post">
-                                        @method('DELETE')
-                                        @csrf
+                                    @can('view', $category)
+                                        @include('categories.includes.show')
+                                    @endcan
 
-                                        <button type="submit" class="btn btn-outline-danger">Delete</button>
-                                    </form>
-
-                                    <button type="submit" class="btn btn-outline-danger ajax-delete" data-url="{{ route('categories.ajax_delete', $category) }}" data-id="category-{{ $category->id }}">Ajax Delete</button>
+                                    @can('update', $category)
+                                        @include('categories.includes.edit')
+                                    @endcan
+                                    
+                                    @can('delete', $category)
+                                        @include('categories.includes.delete')
+                                        @include('categories.includes.ajax_delete')
+                                    @endcan
                                 </td>
                             </tr>
                         @empty

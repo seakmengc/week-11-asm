@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Category;
+
 return [
 
     /*
@@ -226,7 +228,8 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
+        'Category' => App\Models\Category::class,
+        'Post' => App\Models\Post::class,
     ],
 
 ];

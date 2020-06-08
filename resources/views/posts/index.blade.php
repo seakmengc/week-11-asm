@@ -28,7 +28,10 @@
                                 <td>{{ $post->author->name }}</td>
 
                                 <td>
-                                    @include('posts.includes.actions.show')
+                                    @can('view', $post)
+                                        @include('posts.includes.actions.show')
+                                    @endcan
+                                    
                                     @can('update', $post)
                                         @include('posts.includes.actions.edit')
                                     @endcan
