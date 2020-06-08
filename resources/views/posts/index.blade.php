@@ -31,7 +31,7 @@
                                     @can('view', $post)
                                         @include('posts.includes.actions.show')
                                     @endcan
-                                    
+
                                     @can('update', $post)
                                         @include('posts.includes.actions.edit')
                                     @endcan
@@ -44,7 +44,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td style="text-align: center" colspan="3">No post found. <a href="{{ route('posts.create') }}">Want to add one?</a></td>
+                                <td style="text-align: center" colspan="3">No post found.</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -54,7 +54,9 @@
                         {{ $posts->links() }}
                     </div>
 
-                    @include('posts.includes.actions.add')
+                    @can('create', Post::class)
+                        @include('posts.includes.actions.add')
+                    @endcan
                 </div>
 
             </div>

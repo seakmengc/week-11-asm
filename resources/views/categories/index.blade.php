@@ -30,7 +30,7 @@
                                     @can('update', $category)
                                         @include('categories.includes.edit')
                                     @endcan
-                                    
+
                                     @can('delete', $category)
                                         @include('categories.includes.delete')
                                         @include('categories.includes.ajax_delete')
@@ -39,7 +39,7 @@
                             </tr>
                         @empty
                             <tr>
-                                <td style="text-align: center" colspan="3">No category found. <a href="{{ route('categories.create') }}">Want to add one?</a></td>
+                                <td style="text-align: center" colspan="3">No category found.</td>
                             </tr>
                         @endforelse
                         </tbody>
@@ -49,9 +49,9 @@
                         {{ $categories->links() }}
                     </div>
 
-                    <div class="pl-3 pb-3">
-                        <a class="btn btn-primary" href="{{ route('categories.create') }}">Add</a>
-                    </div>
+                    @can('create', Category::class)
+                        @include('categories.includes.add')
+                    @endcan
                 </div>
 
             </div>
