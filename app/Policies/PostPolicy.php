@@ -10,13 +10,6 @@ class PostPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user, $ability)
-    {
-        if ($user->isAdmin()) {
-            return true;
-        }
-    }
-
     public function viewAny(User $user)
     {
         return $user->isEditor();

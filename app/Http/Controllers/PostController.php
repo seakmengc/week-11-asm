@@ -11,6 +11,8 @@ class PostController extends Controller
 {
     public function index()
     {
+        $this->authorize("viewAny", Post::class);
+
         $posts = Post::with('category')->paginate(10);
 
         return view('posts.index', compact('posts'));
@@ -18,6 +20,8 @@ class PostController extends Controller
 
     public function create()
     {
+        $this->authorize("create", Post::class);
+
         $categories = Category::all();
 
         return view('posts.create', compact('categories'));
@@ -25,6 +29,8 @@ class PostController extends Controller
 
     public function store(PostRequest $request)
     {
+        $this->authorize("create", Post::class);
+
         Post::create($request->validated());
 
         return redirect()->route('posts.index');
@@ -32,6 +38,8 @@ class PostController extends Controller
 
     public function show(Post $post)
     {
+        $this->authorize("view", $post);
+        
         return view('posts.show', compact('post'));
     }
 
